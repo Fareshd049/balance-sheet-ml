@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.env
+.venv/
+venv/
+.envrc
+
+# Jupyter
+.ipynb_checkpoints
+*.ipynb
+
+# Data
+data/raw/*
+!data/raw/.gitkeep
+data/interim/*
+!data/interim/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+
+# VSCode / JetBrains
+.vscode/
+.idea/
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
