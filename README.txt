@@ -5,7 +5,7 @@ Project Structure :
 balnce-sheet-ml/
 │
 ├── data/
-│   ├── raw/               # raw JSON filings (local only, .gitignore)
+│   ├── raw/               # raw JSON filings (local only, .gitignore) import it from the zip shared by Yousra
 │   ├── interim/           # intermediate cleaned files
 │   └── processed/         # final parquet/csv ready for ML
 │
