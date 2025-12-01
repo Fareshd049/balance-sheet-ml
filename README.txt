@@ -25,6 +25,34 @@ balnce-sheet-ml/
 ├── README.md              # project overview
 └── .gitignore             # ignore venv, raw data, cache
 
+🚀 Étapes rapides
+Cloner le repo
+
+bash
+git clone https://github.com/Fareshd049/balance-sheet-ml.git
+cd balance-sheet-ml
+Installer les dépendances
+
+bash
+pip install -r requirements.txt
+Explorer la structure
+
+src/ → scripts modulaires (ingestion, cleaning, normalisation, pivoting, merge).
+
+data/processed/ → fichiers prêts pour ML (wide_norm.parquet).
+
+notebooks/ → notebooks EDA et prototypage.
+
+docs/ → livrables finaux (rapports, figures).
+
+Collaborer
+
+Créez une branche pour vos ajouts.
+
+Faites un pull request pour review.
+
+Utilisez Issues pour suivre les tâches.
+
 Structure détaillée
 data/
 raw/
