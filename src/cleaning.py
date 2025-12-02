@@ -35,7 +35,7 @@ def clean_dataframe(df: pd.DataFrame) -> pd.DataFrame:
 
 
 if __name__ == "__main__":
-    interim = Path("C:\\Users\\PC\\balnce-sheet-ml\\data\\interim")
+    interim = Path("C:\\Users\\PC\\balance-sheet-ml\\data\\interim")
     in_file = interim / "clean_part0.parquet"
     out_file = interim / "cleaned_0.parquet"
 
