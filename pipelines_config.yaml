@@ -1,0 +1,22 @@
+pipelines:
+  active: "features"   # later you can add "training", "deployment", etc.
+
+data:
+  zip_path: "data/raw/companyfacts.zip"
+  extract_dir: "data/raw/companyfacts"          # extracted JSONs go here
+  output_dir: "data/processed/companyfacts_long" # partitioned parquet dataset
+
+  # for quick tests set max_files to 50 or 100, for full run keep 0
+  max_files: 0
+
+  # parquet chunk size written per company (keeps memory stable)
+  chunk_rows: 250000
+
+  include_taxonomies: ["us-gaap"]
+
+features:
+  long_dataset_dir: "data/processed/companyfacts_long"
+  out_path: "data/interim/balance_sheet_wide.parquet"
+  unit_keep: "USD"
+  forms_keep: ["10-K", "10-Q", "10-K/A", "10-Q/A"]
+  min_end: "1980-01-01"
