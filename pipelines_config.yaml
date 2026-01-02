@@ -1,5 +1,5 @@
 pipelines:
-  active: "features"   # later you can add "training", "deployment", etc.
+  active: "training"   # later you can add "training", "deployment", etc.
 
 data:
   zip_path: "data/raw/companyfacts.zip"
@@ -20,3 +20,16 @@ features:
   unit_keep: "USD"
   forms_keep: ["10-K", "10-Q", "10-K/A", "10-Q/A"]
   min_end: "1980-01-01"
+
+model_base:
+  wide_path: "data/interim/balance_sheet_wide.parquet"
+  out_path: "data/interim/balance_sheet_model_base.parquet"
+  min_obs_per_company: 4
+
+training:
+  dataset_path: "data/interim/balance_sheet_model_base.parquet"
+  target_col: "y_Assets"
+  n_tests: 2
+  n_val: 1 
+  alpha: 1.0
+
