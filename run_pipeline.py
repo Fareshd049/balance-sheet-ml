@@ -3,6 +3,7 @@ from pipelines.data_pipeline import data_pipeline
 from pipelines.feature_pipeline import feature_pipeline
 from pipelines.model_base_pipeline import model_base_pipeline
 from pipelines.training_pipeline import training_pipeline
+from pipelines.feature_ratio_pipeline import feature_ratio_pipeline
 
 
 
@@ -51,14 +52,37 @@ def run_model_base_pipeline(cfg: dict) -> None:
 
 def run_training_pipeline(cfg: dict) -> None:
     tcfg = cfg["training"]
+
     response = training_pipeline(
         dataset_path=tcfg["dataset_path"],
         target_col=tcfg.get("target_col", "y_Assets"),
         n_test=int(tcfg.get("n_test", 2)),
         n_val=int(tcfg.get("n_val", 1)),
+
+        # keep alpha for compatibility (unused in tree pipeline)
         alpha=float(tcfg.get("alpha", 1.0)),
+
+        # tree params
+        max_iter=int(tcfg.get("max_iter", 300)),
+        learning_rate=float(tcfg.get("learning_rate", 0.05)),
+        max_depth=int(tcfg.get("max_depth", 6)),
+        early_stopping=bool(tcfg.get("early_stopping", True)),
+        n_iter_no_change=int(tcfg.get("n_iter_no_change", 20)),
+        validation_fraction=float(tcfg.get("validation_fraction", 0.1)),
     )
+
     print("\n✅ Training pipeline triggered.")
+    print(response)
+
+
+
+def run_ratio_pipeline(cfg: dict) -> None:
+    rcfg = cfg["ratios"]
+    response = feature_ratio_pipeline(
+        dataset_path=rcfg["dataset_path"],
+        out_path=rcfg["out_path"],
+    )
+    print("\n✅ Ratio pipeline triggered.")
     print(response)
 
 
@@ -75,6 +99,8 @@ def main() -> None:
         run_model_base_pipeline(cfg)
     elif active == "training":
         run_training_pipeline(cfg)
+    elif active == "ratios":
+        run_ratio_pipeline(cfg)
     else:
         raise ValueError(f"Unknown pipeline: {active}")
 

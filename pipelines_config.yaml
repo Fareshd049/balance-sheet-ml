@@ -27,9 +27,23 @@ model_base:
   min_obs_per_company: 4
 
 training:
-  dataset_path: "data/interim/balance_sheet_model_base.parquet"
+  dataset_path: "data/interim/balance_sheet_model_with_ratios.parquet"
   target_col: "y_Assets"
-  n_tests: 2
-  n_val: 1 
+  n_test: 2
+  n_val: 1
+
+  # tree params
+  max_iter: 900
+  learning_rate: 0.03
+  max_depth: 6
+  early_stopping: true
+  n_iter_no_change: 20
+  validation_fraction: 0.1
+
+  # ridge param kept for compatibility
   alpha: 1.0
 
+
+ratios:
+  dataset_path: "data/interim/balance_sheet_model_base.parquet"
+  out_path: "data/interim/balance_sheet_model_with_ratios.parquet"
