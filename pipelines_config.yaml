@@ -28,20 +28,45 @@ model_base:
 
 training:
   dataset_path: "data/interim/balance_sheet_model_with_ratios.parquet"
-  target_col: "y_Assets"
+
+  # Multi-target
+  target_cols:
+    - "y_Assets"
+    - "y_Liabilities"
+    - "y_StockholdersEquity"
+    - "y_AssetsCurrent"
+    - "y_LiabilitiesCurrent"
+    - "y_CashAndCashEquivalentsAtCarryingValue"
+
+
+  # (Optional) groupings for reporting
+  target_groups:
+    core:
+      - "y_Assets"
+      - "y_Liabilities"
+      - "y_StockholdersEquity"
+
+
+  # (Optional) weights - not used yet unless we add weighted aggregation in eval
+  target_weights:
+    y_Assets: 1.0
+    y_Liabilities: 1.0
+    y_StockholdersEquity: 1.0
+    y_AssetsCurrent: 0.6
+    y_LiabilitiesCurrent: 0.6
+    y_CashAndCashEquivalentsAtCarryingValue: 0.4
+
   n_test: 2
   n_val: 1
-
-  # tree params
   max_iter: 900
   learning_rate: 0.03
   max_depth: 6
   early_stopping: true
   n_iter_no_change: 20
   validation_fraction: 0.1
-
-  # ridge param kept for compatibility
   alpha: 1.0
+
+
 
 
 ratios:

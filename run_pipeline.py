@@ -53,9 +53,14 @@ def run_model_base_pipeline(cfg: dict) -> None:
 def run_training_pipeline(cfg: dict) -> None:
     tcfg = cfg["training"]
 
+    # Backward compatible: prefer target_cols, fallback to [target_col]
+    target_cols = tcfg.get("target_cols")
+    if not target_cols:
+        target_cols = [tcfg.get("target_col", "y_Assets")]
+
     response = training_pipeline(
         dataset_path=tcfg["dataset_path"],
-        target_col=tcfg.get("target_col", "y_Assets"),
+        target_cols=target_cols,   # <-- NEW
         n_test=int(tcfg.get("n_test", 2)),
         n_val=int(tcfg.get("n_val", 1)),
 
@@ -73,6 +78,7 @@ def run_training_pipeline(cfg: dict) -> None:
 
     print("\n✅ Training pipeline triggered.")
     print(response)
+
 
 
 

@@ -1,4 +1,4 @@
-from typing import Dict, Any, Tuple
+from typing import Dict, Any, Tuple, Optional, List
 from typing_extensions import Annotated
 import numpy as np
 import pandas as pd
@@ -8,6 +8,7 @@ from zenml import step
 @step(enable_cache=False)
 def split_step(
     dataset_path: str,
+    target_cols: Optional[List[str]] = None,
     target_col: str = "y_Assets",
     n_test: int = 2,
     n_val: int = 1,

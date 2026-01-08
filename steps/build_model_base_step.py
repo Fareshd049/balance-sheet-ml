@@ -89,14 +89,14 @@ def build_model_base_step(
         df = df[df["Assets"].notna()].copy()
     
     # Require lag for Assets so y_Assets is defined (trainable rows only)
-    if "Assets_lag1" in df.columns:
-        df = df[df["Assets_lag1"].notna()].copy()
-
     # --- Build lag features and targets ---
-    # Lag-1 for each concept
     for c in concepts:
         if c in df.columns:
             df[f"{c}_lag1"] = df.groupby("cik")[c].shift(1)
+
+    # Now require Assets_lag1 if Assets exists
+    if "Assets" in df.columns:
+        df = df[df["Assets_lag1"].notna()].copy()
 
     # Targets: safe logdiff where possible; otherwise raw diff
     # y_{c} = logdiff if valid else diff
