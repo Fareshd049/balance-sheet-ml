@@ -4,6 +4,8 @@ from pipelines.feature_pipeline import feature_pipeline
 from pipelines.model_base_pipeline import model_base_pipeline
 from pipelines.training_pipeline import training_pipeline
 from pipelines.feature_ratio_pipeline import feature_ratio_pipeline
+from pipelines.inference_pipeline import inference_pipeline
+
 
 
 
@@ -91,6 +93,18 @@ def run_ratio_pipeline(cfg: dict) -> None:
     print("\n✅ Ratio pipeline triggered.")
     print(response)
 
+def run_inference_pipeline(cfg: dict) -> None:
+    icfg = cfg["inference"]
+    response = inference_pipeline(
+        dataset_path=icfg["dataset_path"],
+        models_dir=icfg["models_dir"],
+        out_path=icfg["out_path"],
+        mode=icfg.get("mode", "latest_per_company"),
+    )
+    print("\n✅ Inference pipeline triggered.")
+    print(response)
+
+
 
 def main() -> None:
     with open("pipelines_config.yaml", "r", encoding="utf-8") as f:
@@ -107,6 +121,8 @@ def main() -> None:
         run_training_pipeline(cfg)
     elif active == "ratios":
         run_ratio_pipeline(cfg)
+    elif active == "inference":
+        run_inference_pipeline(cfg)
     else:
         raise ValueError(f"Unknown pipeline: {active}")
 

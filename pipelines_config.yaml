@@ -1,5 +1,5 @@
 pipelines:
-  active: "training"   # later you can add "training", "deployment", etc.
+  active: "inference"   # later you can add "training", "deployment", etc.
 
 data:
   zip_path: "data/raw/companyfacts.zip"
@@ -72,3 +72,15 @@ training:
 ratios:
   dataset_path: "data/interim/balance_sheet_model_base.parquet"
   out_path: "data/interim/balance_sheet_model_with_ratios.parquet"
+
+
+
+inference:
+  dataset_path: "data/interim/balance_sheet_model_with_ratios.parquet"
+  models_dir: "data/interim/models"
+  out_path: "data/processed/predictions_latest.parquet"
+
+  # score the most recent row per cik
+  mode: "latest_per_company"
+
+
