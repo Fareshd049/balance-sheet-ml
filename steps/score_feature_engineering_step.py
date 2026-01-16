@@ -18,7 +18,7 @@ RATIO_COLS = [
     "debt_to_equity",
 ]
 
-@step(enable_cache=False)
+@step(enable_cache=True)
 def score_feature_engineering_step(dataset_path: str) -> str:
     df = pd.read_parquet(dataset_path)
 

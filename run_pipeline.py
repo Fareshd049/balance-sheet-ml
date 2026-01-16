@@ -95,14 +95,20 @@ def run_ratio_pipeline(cfg: dict) -> None:
 
 def run_inference_pipeline(cfg: dict) -> None:
     icfg = cfg["inference"]
-    response = inference_pipeline(
-        dataset_path=icfg["dataset_path"],
+
+    res = inference_pipeline(
+        dataset_path=icfg.get("dataset_path"),
+        json_path=icfg.get("json_path"),
         models_dir=icfg["models_dir"],
         out_path=icfg["out_path"],
+        out_scored_path=icfg["out_scored_path"],
         mode=icfg.get("mode", "latest_per_company"),
+        delta_mode=icfg.get("delta_mode", "logdiff"),
     )
-    print("\n✅ Inference pipeline triggered.")
-    print(response)
+
+    print("\n✅ Inference pipeline completed.")
+    print(res)
+
 
 
 
