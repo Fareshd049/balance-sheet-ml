@@ -76,16 +76,20 @@ ratios:
 
 
 inference:
-  dataset_path: "data/interim/balance_sheet_model_with_ratios.parquet"
-  #json_path: "uploads/CIK0000001750.json" if mode=="single_company_json"
-  #dataset_path: null # if mode=="single_company_json"
+  # For single_company_json mode:
+  dataset_path: null
+  json_path: "D:/balance-sheet-ml/CIK0000009999.json"
   models_dir: "data/interim/models"
-  out_path: "data/processed/predictions_latest.parquet" # or "data/processed/predictions_single.parquet" if mode=="single_company_json"
-  out_scored_path: "data/processed/final_scored_latest.parquet" # or "data/processed/final_scored_single.parquet" if mode=="single_company_json"
-
-  # score the most recent row per cik
-  mode: "latest_per_company" #or "single_company_json"
+  out_path: "data/processed/predictions_single.parquet"
+  out_scored_path: "data/processed/final_scored_single.parquet"
+  mode: "single_company_json"
   delta_mode: "logdiff"
   
-
-
+  # For latest_per_company mode (batch), use this instead:
+  # dataset_path: "data/interim/balance_sheet_model_with_ratios.parquet"
+  # json_path: null
+  # models_dir: "data/interim/models"
+  # out_path: "data/processed/predictions_latest.parquet"
+  # out_scored_path: "data/processed/final_scored_latest.parquet"
+  # mode: "latest_per_company"
+  # delta_mode: "logdiff"
