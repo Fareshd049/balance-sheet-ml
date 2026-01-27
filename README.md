@@ -1,4 +1,4 @@
-# 📊 Balance Sheet ML – Financial Risk & Directional Forecasting
+# Balance Sheet ML – Financial Risk & Directional Forecasting
 
 ## Project Overview
 
@@ -14,7 +14,7 @@ The project is implemented using **ZenML pipelines**, ensuring modularity, repro
 
 ---
 
-## 🎯 Problem Statement
+## Problem Statement
 
 Given a company’s historical balance-sheet data:
 
@@ -28,7 +28,7 @@ Key challenges addressed:
 
 ---
 
-## 🧠 Modeling Philosophy
+## Modeling Philosophy
 
 - **We predict changes, not levels**
 - Targets are defined as **safe log-differences** (or raw differences when needed)
@@ -39,7 +39,7 @@ This approach reflects **real-world financial risk modeling practices**.
 
 ---
 
-## 🗂️ Data Source
+## Data Source
 
 - **SEC Company Facts** (XBRL, US-GAAP)
 - Forms used: `10-K`, `10-Q`, and amendments
@@ -49,7 +49,7 @@ This approach reflects **real-world financial risk modeling practices**.
 
 ---
 
-## ⚙️ Pipeline Architecture (ZenML)
+## Pipeline Architecture (ZenML)
 
 The project is organized into **independent, reproducible pipelines**:
 
@@ -92,7 +92,7 @@ The project is organized into **independent, reproducible pipelines**:
 
 ---
 
-## 🎯 Prediction Targets
+## Prediction Targets
 
 The system predicts **one-step-ahead changes** for:
 
@@ -110,7 +110,7 @@ All outputs represent **future changes**, not absolute values.
 
 ---
 
-## 📈 Evaluation Metrics
+## Evaluation Metrics
 
 For each target, evaluation is performed on **validation and test sets** using:
 
@@ -133,7 +133,7 @@ Liquidity variables, especially **cash**, show the strongest predictability.
 
 ---
 
-## ⚠️ Interpretation & Limitations
+## Interpretation & Limitations
 
 - The model **does not predict exact future balance sheets**
 - Large numerical errors can occur when reconstructing levels
@@ -144,7 +144,7 @@ This design choice is **intentional and correct** for financial risk modeling.
 
 ---
 
-## 📊 Visualization & Deployment
+## Visualization & Deployment
 
 The inference outputs are designed to power a **Streamlit dashboard**, featuring:
 
@@ -160,7 +160,7 @@ The project is fully **deployable**, with clean separation between:
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```text
 balance-sheet-ml/
@@ -199,7 +199,9 @@ balance-sheet-ml/
 # Install dependencies
 pip install -r requirements.txt
 
+
 # Run pipelines (configured via pipelines_config.yaml)
+activate data pipeline, import the companyfact.zip and make it on data/raw/
 python run_pipeline.py
 
 
